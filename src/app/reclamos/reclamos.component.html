@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h1>Listado de reclamos</h1>
+            <table class="table table-sm table-hover">
+                <thead>
+                    <th>Titulo</th>
+                    <th>Texto</th>
+                    <th>Locacion</th>
+                    <th>Ação</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of reclamoLista">
+                        <td>{{item.titulo}}</td>
+                        <td>{{item.texto}}</td>
+                        <td>{{item.locacion}}</td>
+                        <td>
+                            <a class="btn" (click)="editar(item)">
+                                <i class="fa fa-pencil-square-o"></i>Editar
+                            </a>
+                            <a class="btn" (click)="eliminar(item.$key)">
+                                <i class="fa fa-trash-square-o"></i>Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-4">
+            <h1>Formulário</h1>
+            <form>
+                <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="reclamoService.selectedReclamo.$key">
+                <div class="form-group">
+                    <label>Titulo</label>
+                    <input class="form-control" name="titulo"  #name="ngModel" 
+                    [(ngModel)]="reclamoService.selected.titulo" placeholder="Titulo"
+                     required>
+                </div>
+                <div class="form-group">
+                    <label>Texto</label>
+                    <input class="form-control" name="texto"  #name="ngModel" 
+                    [(ngModel)]="reclamoService.selected.texto" placeholder="Texto"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label>Locacion</label>
+                    <input class="form-control" name="locacion"  #name="ngModel" 
+                    [(ngModel)]="reclamoService.selected.locacion" placeholder="Locacion"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-default" type="submit" [disabled]="!reclamoForm.valid">
+                        <i class="fa fa-floppy-o"></i>
+                        Grabar
+                    </button> 
+                    <button class="btn btn-default" type="button" (click)="resetForm(reclamoForm)">
+                    <i class="fa fa-repeat"></i>
+                    Limpiar</button>                    
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
